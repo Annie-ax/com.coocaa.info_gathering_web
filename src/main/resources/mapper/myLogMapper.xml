@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="com.coocaa.anniecode.mapper.LogMapper">
+    <resultMap id="BaseResultMap" type="com.coocaa.anniecode.pojo.Log">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="queue" property="queue" jdbcType="VARCHAR" />
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="time_date" property="timeDate" jdbcType="TIMESTAMP" />
+        <result column="time_second" property="timeSecond" jdbcType="INTEGER" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="level" property="level" jdbcType="INTEGER" />
+        <result column="msg" property="msg" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from Log
+    </select>
+
+    <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.coocaa.anniecode.vo.Page">
+        select * from Log limit #{startPage},#{pageSize}
+    </select>
+
+    <select id="selectRecord" resultType="int">
+        select count(*) from Log
+    </select>
+
+    <insert id="saveLog" parameterType="com.coocaa.anniecode.pojo.Log">
+        insert into Log (msg)
+        values(#{msg})
+    </insert>
+
+ </mapper>
